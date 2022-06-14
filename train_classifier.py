@@ -36,7 +36,9 @@ from sklearn.model_selection import GridSearchCV
 
 def load_data(database_filepath):
     engine = create_engine('sqlite:///' + database_filepath)
-    df = pd.read_sql("SELECT * FROM DisasterResponse.db", engine)
+  
+    df = pd.read_sql_table("DisasterResponse.db", engine)
+    
     df = df.drop(columns=['child_alone'])
     X = df.message.values
     y = np.asarray(df[df.columns[4:]])
